@@ -56,6 +56,11 @@
  * I will collect here some canvas/processing/HTML5 possibilities for generative art:
  * https://p5js.org/
  * https://www.openprocessing.org/sketch/912094
+ *
+ * Compare to:
+ * https://mutant.garden/
+ * http://endlessforms.com/g/zuq4l4ld5i_0
+ * 
  */
 
 
