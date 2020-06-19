@@ -1,0 +1,44 @@
+<html>
+<head>
+
+<meta name="KeyWords" content="GEjs">
+<meta name="Description" content="GEjs">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+<title>GEjs test</title>
+
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"> </script>
+<script type="text/javascript" src="node_modules/mersennetwister/src/MersenneTwister.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.0.1/math.min.js"></script>
+<script type="text/javascript" src="GEbrowser.js"></script>
+
+</head>
+
+<body style="background-color:white;">
+
+<p id="ge"></p>
+
+
+<script>
+  document.getElementById("ge").innerHTML = test_run();
+  document.getElementById("ge").innerHTML = test_interactive_run();
+</script>
+
+<div class="footer">
+GEjs <a href="http://www.github.com/jmmcd/GEjs">http://www.github.com/jmmcd/GEjs</a>
+</div>
+
+</body>
+<html>
