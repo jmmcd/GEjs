@@ -528,6 +528,20 @@ function sr_quartic(s) {
 }	
 sr_quartic.maximise = false;
 
+function weasel(s) {
+    var weasel = "METHINKS IT IS LIKE A WEASEL";
+    var i = 0;
+    var err = 0;
+    for (; i < weasel.length; i++) { 
+	if (weasel[i] != s[i]){
+	    err++;
+	}
+    }
+//    document.write("weasel:",weasel," s:",s," err:",err);
+    return err;
+}
+weasel.maximise = false;
+
 function test_run(grammar) {
     // constructor(fitness,
     // 			gram_file, 
@@ -569,3 +583,23 @@ function test_interactive_run(grammar) {
     document.write("Fin!<br><br> test_interactive_run():best_ever: ",ge.best_ever[1],"<hr>");
 }
 	
+function weasel_run(grammar) {
+    // constructor(fitness,
+    // 			gram_file, 
+    // 			popsize,
+    // 			ngens,
+    // 			pmut,
+    // 			trunc,
+    // 			maxdepth,
+    // 			genomelength=200,
+    // 			seed=null)	
+    document.write("GEjs - test_run()...<br>");
+    document.write("The grammar loaded is:<br>",grammar,"<br>");
+    document.write("GEjs starting...<br>");
+    
+    var ge = new GE(weasel, grammar, 100, 1000, 0.2, 0.3, 20);
+    ge.init();
+    var best_ever = ge.evolve();
+    ge.describe_ind(best_ever);
+    document.write("Fin!<br><br> test_run():best_ever: ",best_ever[1],"<hr>");
+}

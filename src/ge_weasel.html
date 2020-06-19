@@ -1,0 +1,62 @@
+<html>
+<head>
+
+<meta name="KeyWords" content="GEjs">
+<meta name="Description" content="GEjs">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+<title>GEjs test</title>
+
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"> </script>
+<script type="text/javascript" src="https://unpkg.com/mersennetwister@0.2.3/src/MersenneTwister.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.0.1/math.min.js"></script>
+<script type="text/javascript" src="GEbrowser.js"></script>
+
+</head>
+
+<body style="background-color:white;">
+
+
+
+  Load in your grammar file for symbolic regression: <br>
+  <input type="file" name="inputfile" id="inputfile"> 
+
+  <p id="ge"></p>
+
+<script>
+  var fr=new FileReader(); 
+  document.getElementById('inputfile') 
+    .addEventListener('change', function() { 
+
+        fr.onload=function(){ 
+            document.getElementById('ge') 
+                .textContent=fr.result;
+	    
+	    document.getElementById("ge").innerHTML = weasel_run(fr.result);
+        } 
+        
+        fr.readAsText(this.files[0]); 
+    }) 
+  
+</script>
+
+
+
+<div class="footer">
+GEjs <a href="http://www.github.com/jmmcd/GEjs">http://www.github.com/jmmcd/GEjs</a>
+</div>
+
+</body>
+<html>
