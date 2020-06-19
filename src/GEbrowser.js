@@ -540,6 +540,9 @@ function test_run(grammar) {
     // 			seed=null)	
     document.write("GEjs - test_run()...<br>");
     //    var ge = new GE(sr_quartic, "sr_grammar.json", 50, 10, 0.2, 0.3, 6);
+    document.write("The grammar loaded is:<br>",grammar,"<br>");
+    document.write("GEjs starting...<br>");
+    
     var ge = new GE(sr_quartic, grammar, 50, 10, 0.2, 0.3, 6);
     ge.init();
     var best_ever = ge.evolve();

@@ -30,10 +30,8 @@
 
 
 
-  Load in your grammar file for symbolic regression: 
+  Load in your grammar file for symbolic regression: <br>
   <input type="file" name="inputfile" id="inputfile"> 
-  <br> 
-  <pre id="output"></pre> 
 
   <p id="ge"></p>
 
@@ -43,7 +41,7 @@
     .addEventListener('change', function() { 
 
         fr.onload=function(){ 
-            document.getElementById('output') 
+            document.getElementById('ge') 
                 .textContent=fr.result;
 	    
 	    document.getElementById("ge").innerHTML = test_run(fr.result);
@@ -51,10 +49,6 @@
         
         fr.readAsText(this.files[0]); 
     }) 
-
-
-  //document.getElementById("ge").innerHTML = test_run();
-  //document.getElementById("ge").innerHTML = test_interactive_run();
   
 </script>
 
