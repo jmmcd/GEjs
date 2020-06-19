@@ -28,13 +28,37 @@
 
 <body style="background-color:white;">
 
-<p id="ge"></p>
 
+
+  Load in your grammar file for symbolic regression: 
+  <input type="file" name="inputfile" id="inputfile"> 
+  <br> 
+  <pre id="output"></pre> 
+
+  <p id="ge"></p>
 
 <script>
-  document.getElementById("ge").innerHTML = test_run();
-  document.getElementById("ge").innerHTML = test_interactive_run();
+  var fr=new FileReader(); 
+  document.getElementById('inputfile') 
+    .addEventListener('change', function() { 
+
+        fr.onload=function(){ 
+            document.getElementById('output') 
+                .textContent=fr.result;
+	    
+	    document.getElementById("ge").innerHTML = test_run(fr.result);
+        } 
+        
+        fr.readAsText(this.files[0]); 
+    }) 
+
+
+  //document.getElementById("ge").innerHTML = test_run();
+  //document.getElementById("ge").innerHTML = test_interactive_run();
+  
 </script>
+
+
 
 <div class="footer">
 GEjs <a href="http://www.github.com/jmmcd/GEjs">http://www.github.com/jmmcd/GEjs</a>

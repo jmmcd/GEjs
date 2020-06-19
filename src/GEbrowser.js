@@ -355,23 +355,22 @@ class GE {
 	}
 
 	loadGrammar(filename) {
-		// given a filename, load and parse the grammar and get some useful information about it
+	    // given a filename, load and parse the grammar and get some useful information about it
 		
-	    //		var s = this.loadFile(filename);
-  	    var json = { "<e>": [[ "(", "<e>", "<bop>", "<e>", ")" ], [ "<uop>", "<e>", ], [ "<var>" ], [ "<const>"] ], "<var>": [["x0"]], "<const>": [["0.1"], ["1.0"]], "<bop>": [["+"], [".*"]], "<uop>": [["-"]] };
-	    var s = JSON.stringify(json);
-		var startIdx = s.indexOf("<");
-		var endIdx = s.indexOf(">"); // we take the first NT as the start symbol
-		var start_sym = s.slice(startIdx, endIdx+1);
-		var obj = this.looseJsonParse(s);
-		return {
-			"rules": obj,
-			"nonterminals": new Set(Object.keys(obj)),
-			"terminals": this.getTerminals(obj),
-			"recursive_NTs": this.getRecursiveNTs(obj), // useful for dealing with maxdepth
-			"start_rule": start_sym,
-			"LCM": this.getGrammarLCM(obj) // we will use this for max codon size
-		};
+	    //var s = this.loadFile(filename);
+	    var s = filename;
+	    var startIdx = s.indexOf("<");
+	    var endIdx = s.indexOf(">"); // we take the first NT as the start symbol
+	    var start_sym = s.slice(startIdx, endIdx+1);
+	    var obj = this.looseJsonParse(s);
+	    return {
+		"rules": obj,
+		"nonterminals": new Set(Object.keys(obj)),
+		"terminals": this.getTerminals(obj),
+		"recursive_NTs": this.getRecursiveNTs(obj), // useful for dealing with maxdepth
+		"start_rule": start_sym,
+		"LCM": this.getGrammarLCM(obj) // we will use this for max codon size
+	    };
 	}
 
 	getGrammarLCM(obj) {
@@ -529,7 +528,7 @@ function sr_quartic(s) {
 }	
 sr_quartic.maximise = false;
 
-function test_run() {
+function test_run(grammar) {
     // constructor(fitness,
     // 			gram_file, 
     // 			popsize,
@@ -540,21 +539,23 @@ function test_run() {
     // 			genomelength=200,
     // 			seed=null)	
     document.write("GEjs - test_run()...<br>");
-    var ge = new GE(sr_quartic, "sr_grammar.json", 50, 10, 0.2, 0.3, 6);
+    //    var ge = new GE(sr_quartic, "sr_grammar.json", 50, 10, 0.2, 0.3, 6);
+    var ge = new GE(sr_quartic, grammar, 50, 10, 0.2, 0.3, 6);
     ge.init();
     var best_ever = ge.evolve();
     ge.describe_ind(best_ever);
     document.write("Fin!<br><br> test_run():best_ever: ",best_ever[1],"<hr>");
 }
 
-function test_interactive_run() {
+function test_interactive_run(grammar) {
     // in an interactive setting, we use an "ask-tell" interface.
     // we can pass null as the fitness. 
     // truncation proportion will be ignored as we will use
     // direct selection of the parents that we tell have fitness = 1.
     // n generations will also be ignored.
     document.write("GEjs - test_interactive_run()...<br>");
-    var ge = new GE(null, "sr_grammar.json", 10, 5, 0.2, 0.3, 6);
+    //    var ge = new GE(null, "sr_grammar.json", 10, 5, 0.2, 0.3, 6);
+    var ge = new GE(null, grammar, 10, 5, 0.2, 0.3, 6);
     ge.init();
     for (var i = 0; i < 5; i++) {
 	var x = ge.ask();
