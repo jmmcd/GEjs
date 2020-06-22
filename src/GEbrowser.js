@@ -145,7 +145,7 @@ class GE {
 	print_statistics() {
 	    // generation #, # evaluations, used codons, fit, phenotype
 	    console.log(this.gen, (this.gen+1) * this.popsize, this.best_ever[2], this.best_ever[3], this.best_ever[1]); 
-	    var buf =  "generation: " + this.gen + " fitness: " + this.best_ever[3].toPrecision(5) + " phenotype: " + this.best_ever[1];
+	    var buf =  "generation: " + this.gen + " fitness: " + this.best_ever[3].toPrecision(4) + " phenotype: " + this.best_ever[1];
 	    var tr = document.createElement("tr");
 	    var element = document.getElementById("resultsbody").prepend(buf,tr);
 	}
@@ -596,7 +596,7 @@ function weasel_run(grammar) {
     // 			genomelength=200,
     // 			seed=null)	
 
-    var ge = new GE(weasel, grammar, 100, 10, 0.2, 0.3, 20);
+    var ge = new GE(weasel, grammar, 100, 50, 0.2, 0.3, 100);
     ge.init();
     var best_ever = ge.evolve();
     ge.describe_ind(best_ever);
@@ -617,11 +617,46 @@ function grid_interactive_run(grammar) {
     var ge = new GE(null, grammar, 20, 5, 0.2, 0.3, 6);
     ge.init();
 
+    //display the initial population on the webpage
+    var x = ge.ask();
+    for (var j = 0; j < ge.popsize; j++) {
+	var jindex = j + 1;
+	var gridindex = jindex.toString();
+	    
+	// create a new <div> element for each phenotype to replace each grid cell
+	var divelement = document.createElement("div");
+	var textnode = document.createTextNode(x[j][1]); //copy phenotype into grid cell
+	divelement.appendChild(textnode);
+	var item = document.getElementById(gridindex); //find the grid cell to replace
+	item.replaceChild(divelement, item.childNodes[0]); //replace the grid cell with the new phenotype
+    } 
+
+    
     // wait for user to ask for the next generation
     document.getElementById("nextgenerationplease").addEventListener("click", function(){
-	// console.log("Generate next generation!");
+
+	//collect fitness values (i.e., direct selection) from the user	    
+	var el = document.getElementById("population");
+	var inputs = el.getElementsByTagName("input");
+	var selects = new Array();
+	for (var i=0, len=inputs.length; i<len; i++) {
+	    if ( inputs[i].type == "checkbox" ) {
+		if ( inputs[i].checked ) {
+		    selects.push(1);
+		}
+		else{
+		    selects.push(0);
+		}
+	    }
+	    inputs[i].checked = false;
+	}
+	console.log(selects);
+	// pass in the selection choices & generate the next population
+	ge.tell(selects);
+
+
+	//display the new population on the webpage
 	var x = ge.ask();
-	//display the population on the webpage
 	for (var j = 0; j < ge.popsize; j++) {
 	    var jindex = j + 1;
 	    var gridindex = jindex.toString();
@@ -633,8 +668,7 @@ function grid_interactive_run(grammar) {
 	    var item = document.getElementById(gridindex); //find the grid cell to replace
 	    item.replaceChild(divelement, item.childNodes[0]); //replace the grid cell with the new phenotype
 	} 
-	//collect fitness values from the user	    
-	ge.tell([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+
 	ge.gen++;
     });
     
