@@ -30,11 +30,28 @@
 
 
 
-  Load in your grammar file for symbolic regression: <br>
+  Load in your grammar file for Dawkins' Weasel: <br>
   <input type="file" name="inputfile" id="inputfile"> 
 
   <p id="ge"></p>
 
+  <table id="results">
+    <thead>
+      <tr>
+	<th>Generation</th>
+	<th>Fitness</th>
+	<th>Solution</th>
+      </tr>
+    </thead>
+    <tbody id="resultsbody">
+      <tr>
+	<td colspan="3">Load the Dawkins' Weasel grammar file above to begin.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  
 <script>
   var fr=new FileReader(); 
   document.getElementById('inputfile') 

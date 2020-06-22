@@ -145,7 +145,12 @@ class GE {
 	print_statistics() {
 	    // generation #, # evaluations, used codons, fit, phenotype
 	    console.log(this.gen, (this.gen+1) * this.popsize, this.best_ever[2], this.best_ever[3], this.best_ever[1]); 
-	    document.write(this.gen,". fitness(",this.best_ever[3], ") phenotype:", this.best_ever[1],"<br>");
+	    //document.write(this.gen,". fitness(",this.best_ever[3], ") phenotype:", this.best_ever[1],"<br>");
+	    var buf =  "generation: " + this.gen + " fitness: " + this.best_ever[3].toPrecision(5) + " phenotype: " + this.best_ever[1];
+	    var tr = document.createElement("tr");
+	    var element = document.getElementById("resultsbody").prepend(buf,tr);
+	    //document.write("elelement: ",element);
+
 	}
 
     describe_ind(ind) {
@@ -593,13 +598,13 @@ function weasel_run(grammar) {
     // 			maxdepth,
     // 			genomelength=200,
     // 			seed=null)	
-    document.write("GEjs - test_run()...<br>");
-    document.write("The grammar loaded is:<br>",grammar,"<br>");
-    document.write("GEjs starting...<br>");
-    
-    var ge = new GE(weasel, grammar, 100, 1000, 0.2, 0.3, 20);
+//    document.write("GEjs - test_run()...<br>");
+//    document.write("The grammar loaded is:<br>",grammar,"<br>");
+//    document.write("GEjs starting...<br>");
+    document.body.append("Starting GEjs...");    
+    var ge = new GE(weasel, grammar, 100, 10, 0.2, 0.3, 20);
     ge.init();
     var best_ever = ge.evolve();
     ge.describe_ind(best_ever);
-    document.write("Fin!<br><br> test_run():best_ever: ",best_ever[1],"<hr>");
+    document.body.append("Fin! test_run():best_ever: ",best_ever[1]);
 }
