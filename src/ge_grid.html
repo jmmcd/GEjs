@@ -32,6 +32,24 @@
   font-size: 30px;
   text-align: center;
 }
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.nextgenbutton {background-color: #4CAF50;} /* Go button */
+.stopbutton {background-color: #f44336;} /* Stop button */ 
+.population{background-color: #cccccc; display: none;}
+}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"> </script>
@@ -49,6 +67,8 @@
   <input type="file" name="inputfile" id="inputfile"> 
   <br>
   <p id="grammar"></p>
+
+<div class="population" id="population">
   <hr></hr>
 <div class="grid-container">
   <div class="grid-item" id="1"><div></div></div>
@@ -72,7 +92,9 @@
   <div class="grid-item" id="19"><div></div></div>
   <div class="grid-item" id="20"><div></div></div>  
 </div>
-  
+
+<div><button class="button nextgenbutton" type="button" id="nextgenerationplease">Click Me to create next Generation!</button></div>
+<div><button class="button stopbutton" type="button" id="finplease">Click Me to Stop Evolution and Exit GEjs!</button></div>
 
   <table id="results">
     <thead>
@@ -99,13 +121,14 @@
         fr.onload=function(){ 
 	    document.getElementById("grammar").innerHTML = grid_interactive_run(fr.result);
             document.getElementById('grammar').textContent = fr.result;
+	    document.getElementById('population').style.display = "block";
         } 
         
         fr.readAsText(this.files[0]); 
     }) 
-  
 </script>
 
+</div> <!-- end of population div-->
 
 
 <div class="footer">

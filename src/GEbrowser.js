@@ -609,20 +609,23 @@ function weasel_run(grammar) {
 
 function grid_interactive_run(grammar) {
     // in an interactive setting, we use an "ask-tell" interface.                                                                     
-    // we can pass null as the fitness.                                                                                                   // truncation proportion will be ignored as we will use                                                                           
+    // we can pass null as the fitness.
+    // truncation proportion will be ignored as we will use                                                                           
     // direct selection of the parents that we tell have fitness = 1.                                                                 
     // n generations will also be ignored.                                                                                             
     
     var ge = new GE(null, grammar, 20, 5, 0.2, 0.3, 6);
     ge.init();
 
-    for (var i = 0; i < ge.ngens; i++) {
-        var x = ge.ask();
-        // we can integrate this into an event loop or whatever.
+    // wait for user to ask for the next generation
+    document.getElementById("nextgenerationplease").addEventListener("click", function(){
+	// console.log("Generate next generation!");
+	var x = ge.ask();
+	//display the population on the webpage
 	for (var j = 0; j < ge.popsize; j++) {
 	    var jindex = j + 1;
 	    var gridindex = jindex.toString();
-
+	    
 	    // create a new <div> element for each phenotype to replace each grid cell
 	    var divelement = document.createElement("div");
 	    var textnode = document.createTextNode(x[j][1]); //copy phenotype into grid cell
@@ -630,12 +633,17 @@ function grid_interactive_run(grammar) {
 	    var item = document.getElementById(gridindex); //find the grid cell to replace
 	    item.replaceChild(divelement, item.childNodes[0]); //replace the grid cell with the new phenotype
 	} 
-        // we "tell" GE the fitvals that we get from the UI                                                                            
+	//collect fitness values from the user	    
 	ge.tell([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
-    }
-    var el = document.createElement("hr");
-    document.body.append(el);
-    el = document.createElement("p");
-    document.body.append("Fin!....",el);
-    document.body.append("best_ever phenotype: ",ge.best_ever[1]);
+    });
+    
+
+    document.getElementById("finplease").addEventListener("click", function(){
+	// console.log("Generate next generation!");
+	var el = document.createElement("hr");
+	document.body.append(el);
+	el = document.createElement("p");
+	document.body.append("Fin!....",el);
+	document.body.append("best_ever phenotype: ",ge.best_ever[1]);
+    });
 }
