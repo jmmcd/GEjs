@@ -635,6 +635,7 @@ function grid_interactive_run(grammar) {
 	} 
 	//collect fitness values from the user	    
 	ge.tell([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+	ge.gen++;
     });
     
 
