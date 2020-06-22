@@ -28,12 +28,14 @@
 
 <body style="background-color:white;">
 
-
-
+  <h1>GEjs - weasel_run()...</h1>
   Load in your grammar file for Dawkins' Weasel: <br>
-  <input type="file" name="inputfile" id="inputfile"> 
+  <input type="file" name="inputfile" id="inputfile">
+  <br>
+  <p id="grammar"></p>
+  <hr></hr>
+  
 
-  <p id="ge"></p>
 
   <table id="results">
     <thead>
@@ -45,7 +47,7 @@
     </thead>
     <tbody id="resultsbody">
       <tr>
-	<td colspan="3">Load the Dawkins' Weasel grammar file above to begin.</td>
+	<td colspan="3"></td>
       </tr>
     </tbody>
   </table>
@@ -57,11 +59,9 @@
   document.getElementById('inputfile') 
     .addEventListener('change', function() { 
 
-        fr.onload=function(){ 
-            document.getElementById('ge') 
-                .textContent=fr.result;
-	    
-	    document.getElementById("ge").innerHTML = weasel_run(fr.result);
+        fr.onload=function(){ 	    
+	    document.getElementById("grammar").innerHTML = weasel_run(fr.result);
+	    document.getElementById('grammar').textContent = fr.result;
         } 
         
         fr.readAsText(this.files[0]); 

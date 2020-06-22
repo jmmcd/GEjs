@@ -44,10 +44,12 @@
 <body style="background-color:white;">
 
 
-
+  <h1>GEjs - grid_interactive_run()...</h1>
   Load in your grammar file for ...: <br>
   <input type="file" name="inputfile" id="inputfile"> 
-
+  <br>
+  <p id="grammar"></p>
+  <hr></hr>
 <div class="grid-container">
   <div class="grid-item" id="1"><div></div></div>
   <div class="grid-item" id="2"><div></div></div>
@@ -71,7 +73,6 @@
   <div class="grid-item" id="20"><div></div></div>  
 </div>
   
-  <p id="ge"></p>
 
   <table id="results">
     <thead>
@@ -83,7 +84,7 @@
     </thead>
     <tbody id="resultsbody">
       <tr>
-	<td colspan="3">Load the grammar file above to begin.</td>
+	<td colspan="3"></td>
       </tr>
     </tbody>
   </table>
@@ -96,10 +97,8 @@
     .addEventListener('change', function() { 
 
         fr.onload=function(){ 
-            document.getElementById('ge') 
-                .textContent=fr.result;
-	    
-	    document.getElementById("ge").innerHTML = grid_interactive_run(fr.result);
+	    document.getElementById("grammar").innerHTML = grid_interactive_run(fr.result);
+            document.getElementById('grammar').textContent = fr.result;
         } 
         
         fr.readAsText(this.files[0]); 

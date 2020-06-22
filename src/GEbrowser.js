@@ -145,12 +145,9 @@ class GE {
 	print_statistics() {
 	    // generation #, # evaluations, used codons, fit, phenotype
 	    console.log(this.gen, (this.gen+1) * this.popsize, this.best_ever[2], this.best_ever[3], this.best_ever[1]); 
-	    //document.write(this.gen,". fitness(",this.best_ever[3], ") phenotype:", this.best_ever[1],"<br>");
 	    var buf =  "generation: " + this.gen + " fitness: " + this.best_ever[3].toPrecision(5) + " phenotype: " + this.best_ever[1];
 	    var tr = document.createElement("tr");
 	    var element = document.getElementById("resultsbody").prepend(buf,tr);
-	    //document.write("elelement: ",element);
-
 	}
 
     describe_ind(ind) {
@@ -542,7 +539,6 @@ function weasel(s) {
 	    err++;
 	}
     }
-//    document.write("weasel:",weasel," s:",s," err:",err);
     return err;
 }
 weasel.maximise = false;
@@ -557,16 +553,18 @@ function test_run(grammar) {
     // 			maxdepth,
     // 			genomelength=200,
     // 			seed=null)	
-    document.write("GEjs - test_run()...<br>");
+
     //    var ge = new GE(sr_quartic, "sr_grammar.json", 50, 10, 0.2, 0.3, 6);
-    document.write("The grammar loaded is:<br>",grammar,"<br>");
-    document.write("GEjs starting...<br>");
     
     var ge = new GE(sr_quartic, grammar, 50, 10, 0.2, 0.3, 6);
     ge.init();
     var best_ever = ge.evolve();
     ge.describe_ind(best_ever);
-    document.write("Fin!<br><br> test_run():best_ever: ",best_ever[1],"<hr>");
+    var el = document.createElement("hr");
+    document.body.append(el);
+    el = document.createElement("p");
+    document.body.append("Fin!....",el);
+    document.body.append("best_ever phenotype: ",ge.best_ever[1]);
 }
 
 function test_interactive_run(grammar) {
@@ -575,7 +573,7 @@ function test_interactive_run(grammar) {
     // truncation proportion will be ignored as we will use
     // direct selection of the parents that we tell have fitness = 1.
     // n generations will also be ignored.
-    document.write("GEjs - test_interactive_run()...<br>");
+
     //    var ge = new GE(null, "sr_grammar.json", 10, 5, 0.2, 0.3, 6);
     var ge = new GE(null, grammar, 10, 5, 0.2, 0.3, 6);
     ge.init();
@@ -585,7 +583,6 @@ function test_interactive_run(grammar) {
 	// we "tell" GE the fitvals that we get from the UI
 	ge.tell([1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
     }
-    document.write("Fin!<br><br> test_interactive_run():best_ever: ",ge.best_ever[1],"<hr>");
 }
 	
 function weasel_run(grammar) {
@@ -598,15 +595,16 @@ function weasel_run(grammar) {
     // 			maxdepth,
     // 			genomelength=200,
     // 			seed=null)	
-//    document.write("GEjs - test_run()...<br>");
-//    document.write("The grammar loaded is:<br>",grammar,"<br>");
-//    document.write("GEjs starting...<br>");
-    document.body.append("Starting GEjs...");    
+
     var ge = new GE(weasel, grammar, 100, 10, 0.2, 0.3, 20);
     ge.init();
     var best_ever = ge.evolve();
     ge.describe_ind(best_ever);
-    document.body.append("Fin! test_run():best_ever: ",best_ever[1]);
+    var el = document.createElement("hr");
+    document.body.append(el);
+    el = document.createElement("p");
+    document.body.append("Fin!....",el);
+    document.body.append("best_ever phenotype: ",ge.best_ever[1]);
 }
 
 function grid_interactive_run(grammar) {
@@ -614,8 +612,7 @@ function grid_interactive_run(grammar) {
     // we can pass null as the fitness.                                                                                                   // truncation proportion will be ignored as we will use                                                                           
     // direct selection of the parents that we tell have fitness = 1.                                                                 
     // n generations will also be ignored.                                                                                             
-    document.body.prepend("GEjs - grid_interactive_run()...");
-
+    
     var ge = new GE(null, grammar, 20, 5, 0.2, 0.3, 6);
     ge.init();
 
@@ -636,6 +633,9 @@ function grid_interactive_run(grammar) {
         // we "tell" GE the fitvals that we get from the UI                                                                            
 	ge.tell([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
     }
-
-    document.body.prepend("Fin!....grid_interactive_run():best_ever: ",ge.best_ever[1]);
+    var el = document.createElement("hr");
+    document.body.append(el);
+    el = document.createElement("p");
+    document.body.append("Fin!....",el);
+    document.body.append("best_ever phenotype: ",ge.best_ever[1]);
 }
