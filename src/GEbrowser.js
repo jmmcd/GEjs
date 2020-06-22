@@ -608,3 +608,34 @@ function weasel_run(grammar) {
     ge.describe_ind(best_ever);
     document.body.append("Fin! test_run():best_ever: ",best_ever[1]);
 }
+
+function grid_interactive_run(grammar) {
+    // in an interactive setting, we use an "ask-tell" interface.                                                                     
+    // we can pass null as the fitness.                                                                                                   // truncation proportion will be ignored as we will use                                                                           
+    // direct selection of the parents that we tell have fitness = 1.                                                                 
+    // n generations will also be ignored.                                                                                             
+    document.body.prepend("GEjs - grid_interactive_run()...");
+
+    var ge = new GE(null, grammar, 20, 5, 0.2, 0.3, 6);
+    ge.init();
+
+    for (var i = 0; i < ge.ngens; i++) {
+        var x = ge.ask();
+        // we can integrate this into an event loop or whatever.
+	for (var j = 0; j < ge.popsize; j++) {
+	    var jindex = j + 1;
+	    var gridindex = jindex.toString();
+
+	    // create a new <div> element for each phenotype to replace each grid cell
+	    var divelement = document.createElement("div");
+	    var textnode = document.createTextNode(x[j][1]); //copy phenotype into grid cell
+	    divelement.appendChild(textnode);
+	    var item = document.getElementById(gridindex); //find the grid cell to replace
+	    item.replaceChild(divelement, item.childNodes[0]); //replace the grid cell with the new phenotype
+	} 
+        // we "tell" GE the fitvals that we get from the UI                                                                            
+	ge.tell([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+    }
+
+    document.body.prepend("Fin!....grid_interactive_run():best_ever: ",ge.best_ever[1]);
+}
