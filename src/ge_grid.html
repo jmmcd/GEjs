@@ -1,0 +1,144 @@
+<html>
+<head>
+
+<meta name="KeyWords" content="GEjs">
+<meta name="Description" content="GEjs">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+<title>GEjs test</title>
+
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background-color: #000000;
+  padding: 10px;
+  grid-gap: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.nextgenbutton {background-color: #4CAF50;} /* Go button */
+.stopbutton {background-color: #f44336;} /* Stop button */ 
+.population{background-color: #cccccc; display: none;}
+
+.grid-item input {
+    cursor: pointer;
+    transform: scale(2);
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"> </script>
+<script type="text/javascript" src="https://unpkg.com/mersennetwister@0.2.3/src/MersenneTwister.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.0.1/math.min.js"></script>
+<script type="text/javascript" src="GEbrowser.js"></script>
+
+</head>
+
+<body style="background-color:white;">
+
+
+  <h1>GEjs - grid_interactive_run()...</h1>
+  Load in your grammar file for ...: <br>
+  <input type="file" name="inputfile" id="inputfile"> 
+  <br>
+  <p id="grammar"></p>
+
+  <hr></hr>
+  
+  <div class="population" id="population">
+    <div class="grid-container">
+      <div class="grid-item" id="1"><div></div><input type="checkbox" id="c1"></div>
+      <div class="grid-item" id="2"><div></div><input type="checkbox" id="c2"></div>
+      <div class="grid-item" id="3"><div></div><input type="checkbox" id="c3"></div>  
+      <div class="grid-item" id="4"><div></div><input type="checkbox" id="c4"></div>
+      <div class="grid-item" id="5"><div></div><input type="checkbox" id="c5"></div>
+      <div class="grid-item" id="6"><div></div><input type="checkbox" id="c6"></div>  
+      <div class="grid-item" id="7"><div></div><input type="checkbox" id="c7"></div>
+      <div class="grid-item" id="8"><div></div><input type="checkbox" id="c8"></div>
+      <div class="grid-item" id="9"><div></div><input type="checkbox" id="c9"></div>
+      <div class="grid-item" id="10"><div></div><input type="checkbox" id="c10"></div>
+      <div class="grid-item" id="11"><div></div><input type="checkbox" id="c11"></div>
+      <div class="grid-item" id="12"><div></div><input type="checkbox" id="c12"></div>
+      <div class="grid-item" id="13"><div></div><input type="checkbox" id="c13"></div>
+      <div class="grid-item" id="14"><div></div><input type="checkbox" id="c14"></div>
+      <div class="grid-item" id="15"><div></div><input type="checkbox" id="c15"></div>
+      <div class="grid-item" id="16"><div></div><input type="checkbox" id="c16"></div>
+      <div class="grid-item" id="17"><div></div><input type="checkbox" id="c17"></div>
+      <div class="grid-item" id="18"><div></div><input type="checkbox" id="c18"></div>
+      <div class="grid-item" id="19"><div></div><input type="checkbox" id="c19"></div>
+      <div class="grid-item" id="20"><div></div><input type="checkbox" id="c20"></div>  
+    </div>
+  
+    <div><button class="button nextgenbutton" type="button" id="nextgenerationplease">Click Me to create next Generation!</button></div>
+    <div><button class="button stopbutton" type="button" id="finplease">Click Me to Stop Evolution and Exit GEjs!</button></div>
+  
+  <table id="results">
+    <thead>
+      <tr>
+	<th>Generation</th>
+	<th>Fitness</th>
+	<th>Solution</th>
+      </tr>
+    </thead>
+    <tbody id="resultsbody">
+      <tr>
+	<td colspan="3"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  
+<script>
+  var fr=new FileReader(); 
+  document.getElementById('inputfile') 
+    .addEventListener('change', function() { 
+
+        fr.onload=function(){ 
+	    document.getElementById("grammar").innerHTML = grid_interactive_run(fr.result);
+            document.getElementById('grammar').textContent = fr.result;
+	    document.getElementById('population').style.display = "block";
+        } 
+        
+        fr.readAsText(this.files[0]); 
+    }) 
+</script>
+
+</div> <!-- end of population div-->
+
+
+<div class="footer">
+GEjs <a href="http://www.github.com/jmmcd/GEjs">http://www.github.com/jmmcd/GEjs</a>
+</div>
+
+</body>
+<html>
