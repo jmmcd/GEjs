@@ -1,7 +1,7 @@
 {
     "<e>": [[ "(", "<e>", "<bop>", "<e>", ")" ], [ "<uop>", "<e>", ], [ "<var>" ], [ "<const>"] ],
-    "<var>": [["x0"]], // we would use x0, x1, etc if needed
+    "<var>": [["x0"]],
     "<const>": [["0.1"], ["1.0"]],
-    "<bop>": [["+"], [".*"]], // notice .* for elementwise multiplication in mathjs
+    "<bop>": [["+"], [".*"]],
     "<uop>": [["-"]]
 }
