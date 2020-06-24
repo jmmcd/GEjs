@@ -699,14 +699,18 @@ function fractal_grid_interactive_run(grammar) {
 	var jindex = j + 1;
 	var gridindex = jindex.toString();
 	    
-	// create a new <div> element for each phenotype to replace each grid cell
-	var divelement = document.createElement("div");
-	var scriptelement = document.createElement("SCRIPT");
-	var textnode = document.createTextNode(x[j][1]); //copy phenotype into grid cell
+	// create a new <script> element for each phenotype to replace each grid cell
+	var scriptelement = document.createElement("script");
+	// find the canvas node index into which the phenotype will be drawn and pass to fractal()
+	var phenotypestring = x[j][1];
+	var newphenotypestring = phenotypestring.concat(",");
+	var canvasindex = gridindex * 100;
+	newphenotypestring = newphenotypestring.concat(canvasindex.toString());
+	newphenotypestring = newphenotypestring.concat(");");
+	var textnode = document.createTextNode(newphenotypestring); //copy phenotype into grid cell
 	scriptelement.appendChild(textnode);
-	divelement.appendChild(scriptelement);
 	var item = document.getElementById(gridindex); //find the grid cell to replace
-	item.replaceChild(divelement, item.childNodes[0]); //replace the grid cell with the new phenotype
+	item.replaceChild(scriptelement, item.childNodes[0]); //replace the grid cell with the new phenotype
     } 
 
     
@@ -738,15 +742,19 @@ function fractal_grid_interactive_run(grammar) {
 	for (var j = 0; j < ge.popsize; j++) {
 	    var jindex = j + 1;
 	    var gridindex = jindex.toString();
-	    
-	    // create a new <div> element for each phenotype to replace each grid cell
-	    var divelement = document.createElement("div");
-	    var scriptelement = document.createElement("SCRIPT");
-	    var textnode = document.createTextNode(x[j][1]); //copy phenotype into grid cell
-	    scriptelement.appendChild(textnode);
-	    divelement.appendChild(scriptelement);
-	    var item = document.getElementById(gridindex); //find the grid cell to replace
-	    item.replaceChild(divelement, item.childNodes[0]); //replace the grid cell with the new phenotype
+
+	    // create a new <script> element for each phenotype to replace each grid cell                                                    
+            var scriptelement = document.createElement("script");
+            // find the canvas node index into which the phenotype will be drawn and pass to fractal()                                       
+	    var phenotypestring = x[j][1];
+            var newphenotypestring = phenotypestring.concat(",");
+            var canvasindex = gridindex * 100;
+            newphenotypestring = newphenotypestring.concat(canvasindex.toString());
+            newphenotypestring = newphenotypestring.concat(");");
+            var textnode = document.createTextNode(newphenotypestring); //copy phenotype into grid cell                                      
+            scriptelement.appendChild(textnode);
+            var item = document.getElementById(gridindex); //find the grid cell to replace                                                   
+            item.replaceChild(scriptelement, item.childNodes[0]); //replace the grid cell with the new phenotype
 	} 
 
 	ge.gen++;

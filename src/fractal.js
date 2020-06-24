@@ -1,12 +1,14 @@
 ///////////////////////////////
 // fractal code
 // https://progur.com/2017/02/create-mandelbrot-fractal-javascript.html
-function fractal(MAG,PANX,PANY){
+function fractal(MAG,PANX,PANY,CANVASID){
     // Create Canvas
     const myCanvas = document.createElement('canvas');
     myCanvas.width = 720;
     myCanvas.height = 480;
-    document.body.appendChild(myCanvas);
+    //    console.log(CANVASID);
+    var item = document.getElementById(CANVASID); //find the grid cell to replace                                                        
+    item.replaceChild(myCanvas, item.childNodes[0]); //replace the grid cell with the new phenotype   
     const ctx = myCanvas.getContext('2d');
 
     // Start drawing
