@@ -682,3 +682,91 @@ function grid_interactive_run(grammar) {
 	document.body.append("best_ever phenotype: ",ge.best_ever[1]);
     });
 }
+
+function fractal_grid_interactive_run(grammar) {
+    // in an interactive setting, we use an "ask-tell" interface.                                                                     
+    // we can pass null as the fitness.
+    // truncation proportion will be ignored as we will use                                                                           
+    // direct selection of the parents that we tell have fitness = 1.                                                                 
+    // n generations will also be ignored.                                                                                             
+    
+    var ge = new GE(null, grammar, 20, 5, 0.2, 0.3, 6);
+    ge.init();
+
+    //display the initial population on the webpage
+    var x = ge.ask();
+    for (var j = 0; j < ge.popsize; j++) {
+	var jindex = j + 1;
+	var gridindex = jindex.toString();
+	    
+	// create a new <script> element for each phenotype to replace each grid cell
+	var scriptelement = document.createElement("script");
+	// find the canvas node index into which the phenotype will be drawn and pass to fractal()
+	var phenotypestring = x[j][1];
+	var newphenotypestring = phenotypestring.concat(",");
+	var canvasindex = gridindex * 100;
+	newphenotypestring = newphenotypestring.concat(canvasindex.toString());
+	newphenotypestring = newphenotypestring.concat(");");
+	var textnode = document.createTextNode(newphenotypestring); //copy phenotype into grid cell
+	scriptelement.appendChild(textnode);
+	var item = document.getElementById(gridindex); //find the grid cell to replace
+	item.replaceChild(scriptelement, item.childNodes[0]); //replace the grid cell with the new phenotype
+    } 
+
+    
+    // wait for user to ask for the next generation
+    document.getElementById("nextgenerationplease").addEventListener("click", function(){
+
+	//collect fitness values (i.e., direct selection) from the user	    
+	var el = document.getElementById("population");
+	var inputs = el.getElementsByTagName("input");
+	var selects = new Array();
+	for (var i=0, len=inputs.length; i<len; i++) {
+	    if ( inputs[i].type == "checkbox" ) {
+		if ( inputs[i].checked ) {
+		    selects.push(1);
+		}
+		else{
+		    selects.push(0);
+		}
+	    }
+	    inputs[i].checked = false;
+	}
+	console.log(selects);
+	// pass in the selection choices & generate the next population
+	ge.tell(selects);
+
+
+	//display the new population on the webpage
+	var x = ge.ask();
+	for (var j = 0; j < ge.popsize; j++) {
+	    var jindex = j + 1;
+	    var gridindex = jindex.toString();
+
+	    // create a new <script> element for each phenotype to replace each grid cell                                                    
+            var scriptelement = document.createElement("script");
+            // find the canvas node index into which the phenotype will be drawn and pass to fractal()                                       
+	    var phenotypestring = x[j][1];
+            var newphenotypestring = phenotypestring.concat(",");
+            var canvasindex = gridindex * 100;
+            newphenotypestring = newphenotypestring.concat(canvasindex.toString());
+            newphenotypestring = newphenotypestring.concat(");");
+            var textnode = document.createTextNode(newphenotypestring); //copy phenotype into grid cell                                      
+            scriptelement.appendChild(textnode);
+            var item = document.getElementById(gridindex); //find the grid cell to replace                                                   
+            item.replaceChild(scriptelement, item.childNodes[0]); //replace the grid cell with the new phenotype
+	} 
+
+	ge.gen++;
+    });
+    
+
+    document.getElementById("finplease").addEventListener("click", function(){
+	// console.log("Generate next generation!");
+	var el = document.createElement("hr");
+	document.body.append(el);
+	el = document.createElement("p");
+	document.body.append("Fin!....",el);
+	document.body.append("best_ever phenotype: ",ge.best_ever[1]);
+    });
+}
