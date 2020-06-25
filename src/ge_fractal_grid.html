@@ -62,7 +62,15 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.0.1/math.min.js"></script>
 <script type="text/javascript" src="GEbrowser.js"></script>
 <script type="text/javascript" src="fractal.js"></script>
-
+<script>
+  function download(downloadid,canvasid){
+      var downloadidstring = downloadid.id.toString();
+      var canvasidstring = canvasid.toString();
+      var download = document.getElementById(downloadidstring);
+      var image = document.getElementById(canvasidstring).childNodes[0].toDataURL();
+      download.setAttribute("href", image);
+  }  
+</script>
 </head>
 
 <body style="background-color:white;">
@@ -83,26 +91,26 @@
   
   <div class="population" id="population">
     <div class="grid-container">
-      <div class="grid-item" id="1"><script></script><div id="100"><canvas></canvas></div></div>
-      <div class="grid-item" id="2"><script></script><div id="200"><canvas></canvas></div></div>
-      <div class="grid-item" id="3"><script></script><div id="300"><canvas></canvas></div></div>  
-      <div class="grid-item" id="4"><script></script><div id="400"><canvas></canvas></div></div>
-      <div class="grid-item" id="5"><script></script><div id="500"><canvas></canvas></div></div>
-      <div class="grid-item" id="6"><script></script><div id="600"><canvas></canvas></div></div>  
-      <div class="grid-item" id="7"><script></script><div id="700"><canvas></canvas></div></div>
-      <div class="grid-item" id="8"><script></script><div id="800"><canvas></canvas></div></div>
-      <div class="grid-item" id="9"><script></script><div id="900"><canvas></canvas></div></div>
-      <div class="grid-item" id="10"><script></script><div id="1000"><canvas></canvas></div></div>
-      <div class="grid-item" id="11"><script></script><div id="1100"><canvas></canvas></div></div>
-      <div class="grid-item" id="12"><script></script><div id="1200"><canvas></canvas></div></div>
-      <div class="grid-item" id="13"><script></script><div id="1300"><canvas></canvas></div></div>
-      <div class="grid-item" id="14"><script></script><div id="1400"><canvas></canvas></div></div>
-      <div class="grid-item" id="15"><script></script><div id="1500"><canvas></canvas></div></div>
-      <div class="grid-item" id="16"><script></script><div id="1600"><canvas></canvas></div></div>
-      <div class="grid-item" id="17"><script></script><div id="1700"><canvas></canvas></div></div>
-      <div class="grid-item" id="18"><script></script><div id="1800"><canvas></canvas></div></div>
-      <div class="grid-item" id="19"><script></script><div id="1900"><canvas></canvas></div></div>
-      <div class="grid-item" id="20"><script></script><div id="2000"><canvas></canvas></div></div>  
+      <div class="grid-item" id="1"><script></script><div id="100"><canvas></canvas></div><a id="d100" download="GEjs_image.png"><button type="button" onClick="download(d100,100)">Download</button></a></div>
+      <div class="grid-item" id="2"><script></script><div id="200"><canvas></canvas></div><a id="d200" download="GEjs_image.png"><button type="button" onClick="download(d200,200)">Download</button></a></div>
+      <div class="grid-item" id="3"><script></script><div id="300"><canvas></canvas></div><a id="d300" download="GEjs_image.png"><button type="button" onClick="download(d300,300)">Download</button></a></div>  
+      <div class="grid-item" id="4"><script></script><div id="400"><canvas></canvas></div><a id="d400" download="GEjs_image.png"><button type="button" onClick="download(d400,400)">Download</button></a></div>
+      <div class="grid-item" id="5"><script></script><div id="500"><canvas></canvas></div><a id="d500" download="GEjs_image.png"><button type="button" onClick="download(d500,500)">Download</button></a></div>
+      <div class="grid-item" id="6"><script></script><div id="600"><canvas></canvas></div><a id="d600" download="GEjs_image.png"><button type="button" onClick="download(d600,600)">Download</button></a></div>  
+      <div class="grid-item" id="7"><script></script><div id="700"><canvas></canvas></div><a id="d700" download="GEjs_image.png"><button type="button" onClick="download(d700,700)">Download</button></a></div>
+      <div class="grid-item" id="8"><script></script><div id="800"><canvas></canvas></div><a id="d800" download="GEjs_image.png"><button type="button" onClick="download(d800,800)">Download</button></a></div>
+      <div class="grid-item" id="9"><script></script><div id="900"><canvas></canvas></div><a id="d900" download="GEjs_image.png"><button type="button" onClick="download(d900,900)">Download</button></a></div>
+      <div class="grid-item" id="10"><script></script><div id="1000"><canvas></canvas></div><a id="d1000" download="GEjs_image.png"><button type="button" onClick="download(d1000,1000)">Download</button></a></div>
+      <div class="grid-item" id="11"><script></script><div id="1100"><canvas></canvas></div><a id="d1100" download="GEjs_image.png"><button type="button" onClick="download(d1100,1100)">Download</button></a></div>
+      <div class="grid-item" id="12"><script></script><div id="1200"><canvas></canvas></div><a id="d1200" download="GEjs_image.png"><button type="button" onClick="download(d1200,1200)">Download</button></a></div>
+      <div class="grid-item" id="13"><script></script><div id="1300"><canvas></canvas></div><a id="d1300" download="GEjs_image.png"><button type="button" onClick="download(d1300,1300)">Download</button></a></div>
+      <div class="grid-item" id="14"><script></script><div id="1400"><canvas></canvas></div><a id="d1400" download="GEjs_image.png"><button type="button" onClick="download(d1400,1400)">Download</button></a></div>
+      <div class="grid-item" id="15"><script></script><div id="1500"><canvas></canvas></div><a id="d1500" download="GEjs_image.png"><button type="button" onClick="download(d1500,1500)">Download</button></a></div>
+      <div class="grid-item" id="16"><script></script><div id="1600"><canvas></canvas></div><a id="d1600" download="GEjs_image.png"><button type="button" onClick="download(d1600,1600)">Download</button></a></div>
+      <div class="grid-item" id="17"><script></script><div id="1700"><canvas></canvas></div><a id="d1700" download="GEjs_image.png"><button type="button" onClick="download(d1700,1700)">Download</button></a></div>
+      <div class="grid-item" id="18"><script></script><div id="1800"><canvas></canvas></div><a id="d1800" download="GEjs_image.png"><button type="button" onClick="download(d1800,1800)">Download</button></a></div>
+      <div class="grid-item" id="19"><script></script><div id="1900"><canvas></canvas></div><a id="d1900" download="GEjs_image.png"><button type="button" onClick="download(d1900,1900)">Download</button></a></div>
+      <div class="grid-item" id="20"><script></script><div id="2000"><canvas></canvas></div><a id="d2000" download="GEjs_image.png"><button type="button" onClick="download(d2000,2000)">Download</button></a></div>  
     </div>
   
     <div><button class="button nextgenbutton" type="button" id="nextgenerationplease">Click Me to create next Generation!</button></div>
