@@ -718,21 +718,21 @@ function fractal_grid_interactive_run(grammar) {
     document.getElementById("nextgenerationplease").addEventListener("click", function(){
 
 	//collect fitness values (i.e., direct selection) from the user	    
-	var el = document.getElementById("population");
-	var inputs = el.getElementsByTagName("input");
 	var selects = new Array();
-	for (var i=0, len=inputs.length; i<len; i++) {
-	    if ( inputs[i].type == "checkbox" ) {
-		if ( inputs[i].checked ) {
-		    selects.push(1);
-		}
-		else{
-		    selects.push(0);
-		}
+	for (var i=0, len=20; i<len; i++) {
+	    var iindex = i + 1;
+	    var gridindex = iindex * 100;
+	    var canvasindex = gridindex.toString();
+	    var c = document.getElementById(canvasindex).childNodes[0].getAttribute("clicked");
+	    if ( c == "true" ) {
+		selects.push(1);
 	    }
-	    inputs[i].checked = false;
+	    else{
+		selects.push(0);
+	    }
 	}
 	console.log(selects);
+	
 	// pass in the selection choices & generate the next population
 	ge.tell(selects);
 

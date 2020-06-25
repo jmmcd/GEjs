@@ -22,7 +22,6 @@ function fractal(MAG,PANX,PANY,CANVASID){
 	    //console.log("clicked=true",CANVASID);
 	}
     }, false);
-
     
     //    console.log(CANVASID);
     var item = document.getElementById(CANVASID); //find the grid cell to replace                                                        
