@@ -6,11 +6,30 @@ function fractal(MAG,PANX,PANY,CANVASID){
     const myCanvas = document.createElement('canvas');
     myCanvas.width = 720;
     myCanvas.height = 480;
+    myCanvas.style="border:5px solid #ff0000;"
+    myCanvas.setAttribute("clicked", "false");
+    myCanvas.addEventListener('click', function() {
+	var c = myCanvas.getAttribute("clicked");
+	//console.log("clickedstate=",c);
+	if ( c == "true" ) {
+	    myCanvas.setAttribute("clicked", "false");
+	    myCanvas.setAttribute("style", "border: 5px solid #ff0000;");
+	    //console.log("clicked=false",CANVASID);
+	}
+	else{
+	    myCanvas.setAttribute("clicked", "true");
+	    myCanvas.setAttribute("style", "border: 5px solid #00ff00;");
+	    //console.log("clicked=true",CANVASID);
+	}
+    }, false);
+
+    
     //    console.log(CANVASID);
     var item = document.getElementById(CANVASID); //find the grid cell to replace                                                        
     item.replaceChild(myCanvas, item.childNodes[0]); //replace the grid cell with the new phenotype   
     const ctx = myCanvas.getContext('2d');
 
+    
     // Start drawing
     function checkIfBelongsToMandelbrotSet(x,y) {
         let realComponentOfResult = x;
